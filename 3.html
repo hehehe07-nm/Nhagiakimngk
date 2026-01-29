@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Nhà Giả Kim</title>
+
+<style>
+/* ===== NỀN TOÀN TRANG ===== */
+body{
+  margin:0;
+  font-family:"Times New Roman",serif;
+  line-height:1.8;
+  color:#2b2b2b;
+
+  background:
+    radial-gradient(circle at top,
+      rgba(255,245,220,0.25),
+      rgba(10,15,35,0.7)
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(20,30,60,0.85),
+      rgba(60,90,130,0.75),
+      rgba(190,150,90,0.55),
+      rgba(255,225,170,0.45)
+    ),
+    url("https://i.pinimg.com/736x/57/d5/1a/57d51ab457bc6c40fe7306888f649c68.jpg");
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+
+/* ===== STAR FIELD CINEMATIC ===== */
+.stars {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.stars span {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation:
+    starFloat linear infinite,
+    starBlink ease-in-out infinite;
+}
+
+/* sao xa */
+.stars span.small {
+  width: 1.5px;
+  height: 1.5px;
+  opacity: 0.45;
+  animation-duration: 22s, 4s;
+}
+
+/* sao gần */
+.stars span.big {
+  width: 3px;
+  height: 3px;
+  opacity: 0.9;
+  animation-duration: 14s, 2.5s;
+}
+
+@keyframes starFloat {
+  from { transform: translateY(-10vh) translateX(0); }
+  to   { transform: translateY(120vh) translateX(-40vw); }
+}
+
+@keyframes starBlink {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+.shooting-star {
+  position: fixed;
+  top: -20%;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(90deg, white, transparent);
+  opacity: 0;
+  transform: rotate(-20deg);
+  animation: shoot 6s linear infinite;
+  z-index: 2;
+}
+
+.shooting-star:nth-child(2) {
+  animation-delay: 2s;
+}
+.shooting-star:nth-child(3) {
+  animation-delay: 4s;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translateX(0) translateY(0) rotate(-20deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  30% {
+    transform: translateX(-120vw) translateY(120vh) rotate(-20deg);
+    opacity: 0;
+  }
+  100% { opacity: 0; }
+}
+
+
+/* ===== TIÊU ĐỀ ===== */
+.giua-text{
+  text-align:center;
+  padding:60px 20px;
+  position:relative;
+  z-index:2;
+}
+h1{
+  font-family:"Papyrus",fantasy;
+  font-size:82px;
+  color:#FFD97A;
+  text-shadow:0 0 14px rgba(255,215,120,.9), 2px 2px 6px #000;
+}
+h3{
+  font-size:38px;
+  color:#F5C16C;
+  text-shadow:1px 1px 4px #000;
+}
+/* ===== SOFT LIGHT AURA ===== */
+.light-aura {
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(255,240,180,.25),
+      rgba(255,240,180,.1) 30%,
+      transparent 60%);
+  mix-blend-mode: screen;
+  animation: auraMove 18s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes auraMove {
+  from { transform: translate(-5%, -5%); }
+  to   { transform: translate(5%, 5%); }
+}
+
+/* ===== BOX CHUNG ===== */
+.main-box{
+  width:90%;
+  margin:40px auto;
+  padding:40px;
+  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.45);
+  border-radius:22px;
+  box-shadow:0 14px 40px rgba(0,0,0,.35);
+  transition:.45s;
+  position:relative;
+  z-index:2;
+}
+.main-box:hover{
+  background:rgba(255,255,255,0.65);
+  box-shadow:0 0 40px rgba(255,220,140,.9);
+  transform:translateY(-10px);
+}
+
+h2{
+  text-align:center;
+  font-family:"Lucida Console",monospace;
+  font-size:32px;
+  color:#B8860B;
+  margin-bottom:25px;
+}
+
+p{
+  font-size:21px;
+  line-height:1.75;
+  color:#1b1b1b;
+  text-align:justify;
+}
+
+/* ===== ẢNH + TEXT NGANG ===== */
+.flex-row{
+  display:flex;
+  gap:40px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.flex-row img{
+  max-width:320px;
+  border-radius:18px;
+  box-shadow:0 14px 32px rgba(0,0,0,.45);
+}
+
+/* ===== THÔNG TIN THÚ VỊ ===== */
+.fun-facts{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+}
+.fact{
+  flex:1;
+  background:rgba(255,245,220,.65);
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+  transition:.35s;
+}
+.fact:hover{
+  background:rgba(255,245,220,.9);
+  box-shadow:0 0 30px rgba(255,210,120,.8);
+}
+
+/* ===== TRÍCH DẪN ===== */
+blockquote{
+  width:85%;
+  margin:60px auto;
+  padding:30px;
+  background:rgba(255,235,200,.6);
+  border-left:10px solid #B8860B;
+  border-radius:18px;
+  font-style:italic;
+  font-size:22px;
+  position:relative;
+  z-index:2;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:28px;
+  background:#6b5a3a;
+  color:white;
+  font-size:16px;
+}
+.contact-section {
+  width: 90%;
+  margin: 80px auto 40px;
+  padding: 35px;
+  background: rgba(255,255,255,0.45);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+  transition: all 0.45s ease;
+  position: relative;
+  z-index: 3;
+}
+
+.contact-section:hover {
+  background: rgba(255,255,255,0.65);
+  box-shadow: 0 0 40px rgba(255,220,150,0.9);
+}
+
+.contact-title {
+  text-align: center;
+  font-size: 36px;
+  color: #B8860B;
+  font-family: "Courier New", monospace;
+  margin-bottom: 25px;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  flex-wrap: wrap;
+  font-size: 22px;
+}
+
+.contact-box {
+  background: rgba(255,245,220,0.65);
+  padding: 20px 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  transition: all 0.35s ease;
+}
+
+.contact-box:hover {
+  background: rgba(255,245,220,0.9);
+  box-shadow: 0 0 28px rgba(255,210,120,0.85);
+  transform: translateY(-6px);
+}
+
+/* ===== CINEMATIC FOG ===== */
+.fog {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 40% 60%, rgba(255,255,255,.08), transparent 60%),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,.05), transparent 55%);
+  animation: fogDrift 25s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes fogDrift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-80px); }
+}
+/* ===== MEDIA BOX ===== */
+.media-box video{
+  width:100%;
+  max-width:900px;
+  display:block;
+  margin:20px auto 25px;
+  border-radius:18px;
+  box-shadow:0 12px 35px rgba(0,0,0,.45);
+}
+
+.media-box audio{
+  width:70%;
+  display:block;
+  margin:0 auto;
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="stars">
+  <span class="small" style="left:5%; top:-10%;"></span>
+  <span class="big" style="left:15%; top:-30%;"></span>
+  <span class="small" style="left:28%; top:-50%;"></span>
+  <span class="big" style="left:40%; top:-20%;"></span>
+  <span class="small" style="left:55%; top:-60%;"></span>
+  <span class="big" style="left:65%; top:-40%;"></span>
+  <span class="small" style="left:75%; top:-70%;"></span>
+  <span class="big" style="left:85%; top:-25%;"></span>
+  <span class="small" style="left:95%; top:-55%;"></span>
+</div>
+<div class="light-aura"></div>
+<div class="fog"></div>
+
+
+<div class="giua-text">
+  <h1>Nhà Giả Kim</h1>
+  <h3>– Paulo Coelho –</h3>
+</div>
+
+<!-- GIỚI THIỆU TÁC GIẢ -->
+<div class="main-box">
+  <h2>Giới thiệu tác giả</h2>
+  <div class="flex-row">
+    <img src="https://i.pinimg.com/736x/e5/97/27/e59727d231838cb43590db1bb066a8d9.jpg" alt="Paulo Coelho">
+    <p>
+      Paulo Coelho là nhà văn người Brazil, nổi tiếng với những tác phẩm mang đậm màu sắc
+      triết lý, tâm linh và hành trình tìm kiếm bản ngã.
+      Văn chương của ông giản dị nhưng sâu sắc, khơi gợi niềm tin vào ước mơ,
+      số phận và “dấu hiệu của vũ trụ”.
+      <em>Nhà Giả Kim</em> chính là tác phẩm đưa tên tuổi Paulo Coelho trở thành
+      một trong những nhà văn được đọc nhiều nhất thế giới.
+    </p>
+  </div>
+</div>
+
+<!-- TRÍCH DẪN + ẢNH -->
+<div class="main-box flex-row">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_S1DAd8n-KuDz3OmtFE76Kq5nODiqpDLcQQ&s">
+  <p style="font-style:italic;font-size:23px;">
+    “Khi bạn thật sự khao khát một điều gì, cả vũ trụ sẽ hợp lực giúp bạn đạt được điều đó.”
+  </p>
+</div>
+
+<div class="main-box">
+<h2>1. Tóm tắt nội dung</h2>
+<p>Câu chuyện xoay quanh Santiago - một cậu chăn cừu người Tây Ban Nha luôn khao khát đi tìm kho báu trong giấc mơ lặp đi lặp lại của mình. Trên hành trình, Santiago gặp một ông lão bí ẩn tên là Melchizedek, người khuyên cậu theo đuổi "Lý do tồn tại' của chính mình. Cậu vượt qua sa mạc, đối diện những trở ngại, cám dỗ và nỗi sợ bản thân. Tại ốc đảo, Santiago gặp Fatima - cô gái sa mạc mà cậu đem lòng yêu. Cậu cũng được một Nhà Giả Kim dẫn dắt, chỉ cho cậu cách lắng nghe trái tim và đọc hiểu ngôn ngữ của thế giới. Sau bao thử thách, Santiago nhận ra kho báu không chỉ là vật chất mà là hành trình hiểu ngôn ngữ của thế giới, khám phá bản thân.Cuối cùng, cậu tìm thấy kho báu ở chính quê hương - nơi khởi đầu giấc mơ.</p>
+</div>
+
+<div class="main-box">
+<h2>2. Cảm nhận cá nhân</h2>
+<p>Nhà Giả Kim là một cuốn sách nhẹ nhàng nhưng mang triết lý sâu sắc, phù hợp cho những ai đang loay hoay tìm hướng đi trong cuộc sống, trong đó có cả bản thân mình.Câu chuyện khiến mình cảm nhận rõ rằng mỗi người đều có “kho báu” riêng đang chờ được mở ra.Hành trình của Santiago cũng giống như hành trình trưởng thành của bất kỳ ai – đầy sợ hãi nhưng luôn có ánh sáng dẫn đường.Đọc xong, mình thấy bản thân trở nên bình tĩnh và tin tưởng hơn vào trực giác, vào “dấu hiệu” của cuộc đời hơn, cũng như tin vào một ngày mai tươi đẹp hơn.</p>
+</div>
+
+<div class="main-box">
+<h2>3. Thông tin thú vị</h2>
+<div class="fun-facts">
+  <div class="fact">1.Nhà Giả Kim được Paulo Coelho viết chỉ trong hai tuần, vì ông nói câu chuyện “đã sống sẵn trong tâm trí mình”.</div>
+  <div class="fact">2.Sách ban đầu bán rất chậm, nhà xuất bản đầu tiên còn từ chối tái bản, nhưng sau này lại trở thành best-seller toàn cầu với hơn 65 triệu bản.</div>
+  <div class="fact">3.Paulo Coelho từng hành hương theo tuyến đường Camino de Santiago, và trải nghiệm này truyền cảm hứng mạnh mẽ cho hành trình tinh thần của nhân vật chính.</div>
+</div>
+</div>
+<!-- VIDEO + AUDIO -->
+<div class="main-box media-box">
+  <h2>Không gian cảm hứng</h2>
+
+  <video controls autoplay muted loop>
+    <source src="dreamina-2026-01-27-7873-Hãy tạo một video mở đầu là bầu trời sao....mp4" type="video/mp4">
+    Trình duyệt không hỗ trợ video.
+  </video>
+
+  <audio controls autoplay loop>
+    <source src="20260129_Paulo_Coel.mp3" type="audio/mpeg">
+    Trình duyệt không hỗ trợ audio.
+  </audio>
+</div>
+
+
+<blockquote>
+“Chỉ có một điều ngăn cản ước mơ trở thành hiện thực: đó là nỗi sợ thất bại.”
+</blockquote>
+
+ <script>
+        const container = document.getElementById('desert-particles-container');
+        const particleCount = 500;
+        const maxParticleSize = 1;
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'sand-particle';
+            const size = Math.random() * maxParticleSize + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.top = `${Math.random() * 100}vh`;
+            const duration = Math.random() * 4 + 2;
+            const xEnd = (Math.random() - 0.5) * 500;
+            const yEnd = (Math.random() - 0.5) * 200;
+            const keyframes = [
+                {
+                    transform: 'translate(0,0) rotate(0deg)',
+                    opacity: 0,
+                    offset:0
+                },
+                {
+                    opacity: 0.8,
+                    offset: 0.2
+                },
+                {
+                    transform:`translate(${xEnd}px, ${yEnd}px) rotate(${Math.random() * 360}deg)`,
+                    opacity: 0,
+                    offset: 1
+                }
+            ];
+            const options = {
+                duration: duration * 1000,
+                iterations: Infinity,
+                easing: 'linear'
+            };
+            particle.animate(keyframes,options);
+            container.appendChild(particle);
+        }
+        for (let i = 0; i <particleCount; i++) {
+            createParticle();
+        }
+    </script>
+</body>
+</html>
